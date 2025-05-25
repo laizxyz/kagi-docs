@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { SearchPlugin } from 'kagi-sidekick-vitepress'
+import markdownItKatex from '@vscode/markdown-it-katex'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -73,7 +74,16 @@ export default defineConfig({
     ignoreDeadLinks: true,
     sitemap: {
         hostname: 'https://help.kagi.com'
-    }
+    },
+    markdown: {
+        config: (md) => {
+            // Backport fix from vuejs/vitepress#4082
+            md.renderer.rules.table_open = function (tokens, idx, options, env, self) {
+                return self.renderToken(tokens, idx, options)
+            };
+            md.use(markdownItKatex.default, { output: "mathml" });
+        },
+    },
 })
 
 function sidebarKagi() {
@@ -90,14 +100,7 @@ function sidebarKagi() {
                         { text: 'Products', link: '/kagi/company/products' },
                         { text: 'History', link: '/kagi/company/history' },
                         { text: 'Assets', link: '/kagi/company/assets' },
-                        {
-                            text: 'Jobs', link: '/kagi/company/hiring-kagi',
-                            collapsed: true,
-                            items: [
-                                { text: 'Jobs at Kagi Search', link: '/kagi/company/hiring-kagi' },
-                                { text: 'Jobs at Orion Browser', link: '/kagi/company/hiring-orion' },
-                            ]
-                        },
+			{ text: 'Jobs', link: '/kagi/company/hiring-kagi' },
                         { text: 'Open Source Support', link: '/kagi/company/donations' },
                         { text: 'Contact Us', link: '/kagi/company/contact' },
                     ]
@@ -128,7 +131,7 @@ function sidebarKagi() {
                         { text: 'Community Doggos', link: '/kagi/support-and-community/doggos' },
                     ]
                 },
-                { text: 'Frequently Asked Questions', link: '/kagi/faq/sales-tax-vat' },
+                { text: 'Frequently Asked Questions', link: '/kagi/faq/faq' },
                 {
                     text: 'Contribute',
                     collapsed: true,
@@ -156,7 +159,8 @@ function sidebarKagi() {
                         { text: 'Privacy Protection', link: '/kagi/privacy/privacy-protection' },
                         { text: 'Private Browser Sessions', link: '/kagi/privacy/private-browser-sessions' },
                         { text: 'Two Factor Authentication', link: '/kagi/privacy/two-factor-authentication' },
-                        { text: 'Privacy Pass', link: '/kagi/privacy/privacy-pass' },
+                        { text: 'Kagi Privacy Pass', link: '/kagi/privacy/privacy-pass' },
+                        { text: 'How does Privacy Pass work?', link: '/kagi/privacy/how-does-privacy-pass-work' },
                         { text: 'Using Kagi with Tor', link: '/kagi/privacy/tor' },
                         { text: 'Log in with QR Code', link: '/kagi/privacy/log-in-with-qr-code' },
                         { text: 'Content Policy', link: '/kagi/privacy/content-policy' },

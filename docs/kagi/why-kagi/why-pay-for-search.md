@@ -34,6 +34,11 @@ Let's be crystal clear about what "free" really costs:
 
 **Google is only "free" if your time has no value.** Every ad, every clickbait result, every distraction steals minutes of your life you'll never get back.
 
+Moreoever, "free" search engines come at a real cost, not just inconvenience, but financial harm and vulnerability to scams. The business model muddle is real. Illusion of "free" is real. Boston Globe's Aaron Pressman describes the journey that ultimately [led him to Kagi](https://www.bostonglobe.com/2025/04/01/business/google-search-problems-alternatives-kagi/):
+
+![Boston Globe excerpt](https://github.com/user-attachments/assets/70e7b750-0a1b-4824-a927-86f677a70487)
+
+
 ## The Kagi difference
 
 We built a better way:
@@ -43,7 +48,8 @@ We built a better way:
 - Complete privacy protection
 - Tools and features built for users, not advertisers
 
-![Why_pay_for_search](media/why_pay_for_search_kagi.png)
+![Why pay for search](https://github.com/user-attachments/assets/acc400f3-c25a-4bf9-8ed9-1a74eb3e8509)
+
 
 ## Choose your future
 
@@ -59,6 +65,11 @@ When you choose Kagi, you're not just buying a service. You're investing in a be
 
 The question isn't "Why pay for search?"
 It's "Why settle for less?"
+
+##  Why quality software isn't free
+> We have become numb to the taste of good software and hypnotized by the idea of "free".
+
+We recommend reading [this article](https://stephango.com/quality-software) about why quality software deserves your hard‑earned cash. Industrial software from big tech companies are subsidized by advertising, proprietary ecosystems, or enterprise contracts, creating the illusion that software should be cheap or "free". This often comes at the cost of your privacy and quality of the product. In contrast, independent makers like Kagi not only prioritize privacy but also the craftsmanship of our products. We listen and act upon your [feedback](https://kagifeedback.org/) and suggestions, as we're building tools that truly serve you. 
 
 [Start your journey →](https://kagi.com/signup?plan_id=trial)
 

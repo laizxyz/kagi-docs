@@ -2,67 +2,89 @@
 
 Introducing the Kagi LLM Benchmarking Project, which evaluates major large language models (LLMs) on their reasoning, coding, and instruction following capabilities.
 
-## LLM Benchmarks
+## Kagi Reasoning Benchmark
 
-The Kagi LLM Benchmarking Project uses an unpolluted benchmark to assess contemporary large language models (LLMs) through diverse, challenging tasks. Unlike standard benchmarks, our tests frequently change and are mostly novel, providing a rigorous evaluation of the models' capabilities, (hopefully) outside of what models saw in the training data to avoid benchmark overfitting. 
+The Kagi Reasoning Benchmark is an **unpolluted reasoning benchmark** to assess large language models (LLMs) through diverse, challenging tasks. Unlike standard benchmarks, the tasks in this benchmark are unpublished, not to be found in training data or "gamed" in finetuning. The task set those frequently changes, providing a rigorous evaluation of the models' capabilities, (hopefully) outside of what models saw in the training data to avoid benchmark overfitting. 
 
-Last updated **February 27, 2025**
+Last update: **May 6th, 2025** 
 
+Tasks: **100**
 
-### General purpose models
+Avg. Input Tokens for all tasks: **8861**
 
-| Model | Accuracy (%) | Tokens | Total Cost ($) | Median Latency (s) | Speed (tokens/sec) |
-|-----------------------------|---------------|--------|----------------|------------------|-------------------|
-| **OpenAI** gpt-4.5-preview | 69.35 | 14061 | 2.15409 | 8.86 | 11.27  |
-| **Google** gemini-2.0-pro-exp-02-05 | 60.78 | 6420 | 0.32164 | 1.72 | 51.25 |
-| **Anthropic** claude-3-7-sonnet-20250219 |  53.23 | 12196 | 0.20533 | 2.82| 54.12 |
-| **OpenAI** gpt-4o | 48.39 | 10371 | 0.12033 | 2.07 | 48.31 |
-| **Anthropic** claude-3-5-sonnet-20241022 | 43.55 | 9869 | 0.17042 | 2.69 | 50.13 |
-| **DeepSeek** Chat V3 | 41.94 | 22381 | 0.00719 | 4.04  | 63.82 |
-| **Mistral** Large-2411 | 41.94 | 12500 | 0.09042 | 3.07 | 38.02 |
-| **Amazon** Nova-Pro | 40.32 | 15160 | 0.05426 | 3.08 | 60.42 |
-| **Google** gemini-2.0-flash-lite-preview-02-05 |  38.71 | 9470 | 0.01282 | 0.72| 116.74 |
-| **Anthropic** Claude-3.5-haiku-20241022 | 37.10 | 9695 | 0.05593 | 2.08 | 56.60 |
-| **Google** gemini-2.0-flash |  37.10 | 10366 | 0.01852 | 1.04| 83.24|
-| **Meta** llama-3.1-405B-Instruct-Turbo  (Together.ai) | 35.48 | 12315 | 0.09648 | 2.33 | 33.77 |
-| **Meta** llama-3.3-70b-versatile (Groq) | 33.87 | 15008 | 0.01680 | 0.63 | 220.90|
-| **Microsoft** phi-4 14B (local) | 32.26 | 17724 | n/a | n/a | n/a |
-| **Meta** llama-3.1-70b-versatile | 30.65 | 12622 | 0.01495 | 1.42 | 82.35 |
-| **Amazon** Nova-Lite | 24.19 | 16325 | 0.00431 | 2.29 | 87.93 |
-| **Google** gemini-1.5-flash | 22.58 | 6806 | 0.00962 | 0.66 | 77.93 |
-| **Amazon** Nova-Micro | 22.58 | 16445 | 0.00253 | 1.97 | 106.47 |
-| **Alibaba** Qwen-2.5-72B | 20.97 | 8616 | 0.07606 | 9.08 | 10.08 |
-| **OpenAI** gpt-4o-mini | 19.35 | 13363 | 0.00901 | 1.53 | 66.41 |
-| **Anthropic** Claude-3-haiku-20240307| 9.68 | 10296 | 0.01470 | 1.44 | 108.38 |
-| **TII** Falcon3 7B (local) | 9.68 | 18574 | n/a | n/a | n/a |
+**NOTE (2025-05-06):** Cost reporting in the table is not available for this version, but will be back soon.
 
+<div class="minimal-table-margins">
 
+| model                          | provider          | accuracy | time (s) | consistency index | out tokens | tps   |
+|:-------------------------------|:------------------|---------:|---------:|------------------:|-----------:|------:|
+| arcee-ai/maestro-reasoning     | kagi (soon)       |    60.05 |     130k |              0.70 |       400k |  3.00 |
+| Qwen3-235B-A22B                | kagi (soon)       |    58.58 |      79k |              0.76 |       290k |  3.64 |
+| o3                             | kagi (ultimate)   |    57.34 |     1.6k |              0.72 |        12k |  7.75 |
+| Qwen3-14B                      | kagi (soon)       |    56.15 |      65k |              0.70 |       310k |  4.71 |
+| o1                             | kagi (deprecated) |    54.17 |     3.7k |              0.83 |       6.3k |  1.69 |
+| claude 3.7 (extended)          | kagi (ultimate)   |    53.28 |     3.7k |              0.70 |       160k | 44.50 |
+| gemini-2-5-pro                 | kagi (ultimate)   |    50.56 |       9k |              0.81 |        15k |  1.68 |
+| o4-mini                        | kagi (all)        |    49.75 |     1.7k |              0.75 |       9.8k |  5.73 |
+| o3-mini                        | kagi (deprecated) |    48.38 |       5k |              0.82 |        16k |  3.15 |
+| deepseek-r1                    | kagi (ultimate)   |    45.51 |     8.5k |              0.74 |       180k | 21.80 |
+| deepseek-r1-distill-llama-70b  | kagi (all)        |    45.34 |     6.9k |              0.77 |       200k | 28.46 |
+| grok-3-mini (reasoning: high)  | kagi (ultimate)   |    43.77 |       3k |              0.65 |        12k |  3.88 |
+| gpt-4-1                        | kagi (ultimate)   |    42.52 |     1.8k |              0.72 |        23k | 12.46 |
+| perplexity/sonar-reasoning-pro | openrouter        |    40.97 |     2.5k |              0.77 |        20k |  7.80 |
+| grok-3                         | kagi (ultimate)   |    39.83 |     5.5k |              0.71 |        35k |  6.25 |
+| gpt-4-1-mini                   | kagi (all)        |    39.36 |      11k |              0.84 |        24k |  2.18 |
+| chatgpt-4o                     | kagi (ultimate)   |    38.05 |     3.2k |              0.73 |        25k |  7.84 |
+| QVQ-72B-preview                | nebius            |    35.82 |      68k |              0.68 |       190k |  2.78 |
+| perplexity/sonar-pro           | openrouter        |    35.78 |     0.4k |              0.78 |        29k | 65.36 |
+| llama-4-maverick               | kagi (ultimate)   |    35.42 |     7.9k |              0.67 |        40k |  5.03 |
+| Llama-3.3-70B-Instruct         | kagi (deprecated) |    33.33 |     2.1k |              0.81 |        24k | 11.30 |
+| microsoft/phi-4-reasoning      | openrouter        |    32.60 |      49k |              0.67 |       180k |  3.73 |
+| microsoft/phi-4-reasoning-plus | openrouter        |    32.35 |      48k |              0.67 |       160k |  3.33 |
+| deepseek v3                    | kagi (all)        |    31.69 |     9.4k |              0.74 |        44k |  4.67 |
+| thedrummer/anubis-pro-105b-v1  | openrouter        |    31.62 |     8.7k |              0.81 |        27k |  3.16 |
+| llama-4-scout                  | kagi (all)        |    31.16 |     9.8k |              0.74 |        36k |  3.65 |
+| llama-3-70b                    | kagi (deprecated) |    30.39 |     1.4k |              0.80 |        40k | 28.05 |
+| cohere/command-a               | openrouter        |    29.66 |      11k |              0.84 |        34k |  2.99 |
+| mistral-large                  | kagi (ultimate)   |    29.36 |     2.5k |              0.88 |        30k | 12.12 |
+| llama-3-405b                   | kagi (deprecated) |    28.92 |     1.5k |              0.88 |        27k | 17.74 |
+| minimax/minimax-01             | openrouter        |    27.45 |     2.2k |              0.84 |        39k | 18.01 |
+| mistral-small-it-0325          | kagi (all)        |    27.45 |      11k |              0.83 |        36k |  3.18 |
+| google/gemma-3-4b-it           | openrouter        |    25.49 |     6.5k |              0.82 |        35k |  5.37 |
+| Qwen2.5-Coder-32B-it           | nebius            |    25.49 |      11k |              0.82 |        25k |  2.28 |
+| arcee-ai/coder-large           | together          |    25.37 |       1k |              0.82 |        25k | 23.70 |
+| arcee-ai/virtuoso-large        | together          |    24.75 |      19k |              0.85 |        51k |  2.73 |
+| gemini-flash                   | kagi (all)        |    24.51 |     0.8k |              0.72 |        13k | 17.35 |
+| gpt-4-1-nano                   | openai            |    24.39 |      11k |              0.70 |        27k |  2.51 |
+| gpt-4o-mini                    | kagi (deprecated) |    24.02 |     6.8k |              0.77 |        20k |  3.01 |
+| gemma-3-27b                    | kagi (all)        |    23.50 |     5.4k |              0.82 |        13k |  2.50 |
+| mixtral-8x22B-it-v0            | nebius            |    23.28 |     4.1k |              0.83 |        22k |  5.32 |
+| mistral-small                  | mistral           |    22.35 |     8.6k |              0.79 |        20k |  2.35 |
+| nova-pro                       | kagi (deprecated) |    21.57 |     1.3k |              0.80 |        18k | 14.44 |
+| liquid/lfm-7b                  | openrouter        |    19.85 |     4.4k |              0.85 |        25k |  5.63 |
+| ai21/jamba-1.6-large           | openrouter        |    19.85 |     8.4k |              0.81 |        20k |  2.43 |
+| phi-4-multimodal-instruct      | openrouter        |    18.63 |     4.5k |              0.86 |        23k |  5.01 |
+| cohere/command-r7b-12-2024     | openrouter        |    18.23 |     3.8k |              0.80 |        29k |  7.71 |
+| gemma2-9b-it                   | groq              |    18.14 |       1k |              0.84 |        14k | 14.14 |
+| llama-3-3b                     | kagi (deprecated) |    17.89 |      26k |              0.85 |        56k |  2.15 |
+| Phi-3.5-mini-instruct          | nebius            |    17.65 |     5.8k |              0.82 |        34k |  5.96 |
+| Phi-3.5-MoE-instruct           | nebius            |    17.33 |      37k |              0.81 |        98k |  2.66 |
+| nova-lite                      | kagi (deprecated) |    17.16 |     5.4k |              0.82 |        27k |  5.01 |
+| liquid/lfm-40b                 | openrouter        |    14.95 |     6.5k |              0.80 |        25k |  3.81 |
 
-### Reasoning models
+{.sortable}
 
-Reasoning models are optimized for multi-step reasoning and often produce better results on reasoning benchmarks, at the expense of latency and cost. They may not be suitable for all general purpose LLM tasks.
+</div>
 
-| Model | Accuracy (%) | Tokens | Total Cost ($) | Median Latency (s) |
-|-----------------------------|---------------|--------|----------------|------------------|
-| **OpenAI** o1 | 74.19 | 85120 | 5.20579 | 13.26 |
-| **Deepseek** R1 | 70.97 | 152944 | 0.33854 | 17.02|
-| **OpenAI** o3-mini (high) | 64.52 | 243143 | 1.07707 |  15.99  |
-| **Alibaba** Qwen QWQ-32B | 62.96 | 45293 | 0.068 | 5.6 |
-| **OpenAI** o1-mini | 62.90 | 56219 | 0.69509 |6.30 | 
-| **OpenAI** o3-mini | 62.90 | 102059 | 0.45630 |  17.39  |
-| **Anthropic** claude-3-7-sonnet-20250219 (8192 thinking budget) |  62.90 | 179395 | 2.71853 | 25.90  |
-| **Google** gemini-2.0-flash-thinking-exp-01-21 | 58.33  | 14433 |  0.67431 | 5.91 |
-| **Deepseek** r1-distill-llama-70b (Groq) | 46.77 | 43517 | 0.04686 | 2.60 | 260.41 |
+**Note:** Costs in this table are heavy on output tokens, due to the nature of the benchmark tasks. These are not representative costs for use of these models as an agent, where the ratio of input to output tokens will be much different.
 
+**NOTE:** The table shows models completing >0.95% of 100 Tasks 
 
+Reasoning models are denoted by the `CoT` column. They are optimized for multi-step reasoning and often produce better results on reasoning benchmarks, at the expense of latency and cost. They may not be suitable for all general purpose LLM tasks.
 
+The table includes metrics such as overall mode quality (measured as percent of correct responses), total tokens output (some models are less verbose by default, affecting both cost and speed), total cost to run the test and average speed in tokens per second at the time of testing.
 
-
-
-
-
-
-The table includes metrics such as overall mode quality (measured as percent of correct responses), total tokens output (some models are less verbose by default, affecting both cost and speed), total cost to run the test, median response latency and average speed in tokens per second at the time of testing.
+The scores for accuracy per second and accuracy per dollar are normalized accuracy scores for speed and cost. Higher scores are better.
 
 This approach measures the models' potential and adaptability, with some bias towards features essential for [LLM features in Kagi Search](./assistant.md) (mostly around reasoning and instruction following capabilities, see examples below).
 
@@ -85,8 +107,6 @@ What square is the black king on in this chess position: 1Bb3BN/R2Pk2r/1Q5B/4q2R
 ```
 Given a QWERTY keyboard layout, if HEART goes to JRSTY, what does HIGB go to?
 ```
-
-
 
 ## Credits
 
